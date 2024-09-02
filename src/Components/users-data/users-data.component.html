@@ -1,0 +1,39 @@
+<div class="container mx-auto p-6  mt-10">
+
+    <div class="flex items-center mb-6">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Search by email..."
+            class="p-2 border border-gray-300 rounded-md w-full md:w-1/2" />
+        <button (click)="resetSearch()" class="ml-4 bg-red-500 text-white py-2 px-4 rounded-md">Reset</button>
+    </div>
+
+    <div class="  grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  mt-10">
+        @for (user of filteredUsers(); track $index) {
+        <div class="card border hover:scale-105 transition-all border-black rounded-lg shadow-lg p-4 flex items-center">
+            <img class="w-16 h-16 rounded-full mr-4" [src]="user.image" alt="{{ user.username }}">
+            <div>
+                <h2 class="text-xl font-semibold flex justify-start items-center">{{ user.username }}
+
+                    @if (user.is_verified === true ) {
+                    <span class="ml-2 text-green-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </span>
+                    } @else {
+                    <span class="ml-2 text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </span>
+                    }
+                </h2>
+                <p class="text-black">{{ user.email }}</p>
+                <p class="text-black">{{ user.phone }}</p>
+            </div>
+        </div>
+        }
+    </div>
+</div>
